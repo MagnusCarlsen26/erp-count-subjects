@@ -85,7 +85,7 @@ function App() {
                 )}
             <footer style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', padding: '1rem 2rem', color: '#ddd' }}>
                 <p>Created by Khushal Sindhav (B21AI039)</p>&nbsp;&nbsp;
-                <a href="https://github.com/MagnusCarlsen26/erp-subjects/" style={{ textDecoration: 'none' }}>
+                <a href="https://github.com/MagnusCarlsen26/erp-count-subjects/" style={{ textDecoration: 'none' }}>
                     <FaGithub style={{ color: '#fff' }} />
                 </a>
             </footer>

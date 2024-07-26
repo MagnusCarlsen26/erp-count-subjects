@@ -18,34 +18,52 @@ app.use(express.json())
 const CONNECTION_URL = 'mongodb+srv://khushalsindhav26:YcHWqD43lnF9qHKx@cluster0.s9hsg2q.mongodb.net/'
 
 app.post('/traffic',async(req,res) => {
-    const {isTouch } = req.body
-    console.log(isTouch)
-    const info = new trafficModel({isTouch,time : Date.now()})
-    await info.save()
-    res.send('ok')
+    try {
+        const {isTouch } = req.body
+        console.log(isTouch)
+        const info = new trafficModel({isTouch,time : Date.now()})
+        await info.save()
+        res.send('ok')
+    } catch (error) {
+        console.error(error)
+    }
 })
 
 app.post('/autocomplete',async(req,res) => {
-    const { subject } = req.body
-    const data = await subjectModel.find(); 
-    const fuse = new Fuse(data, {
-      keys: ['subject']
-    });
-    const results = fuse.search(subject,{ limit: 5 });
-    res.json(results.map((item) => item.item.subject));
+    try {
+
+        const { subject } = req.body
+        const data = await subjectModel.find(); 
+        const fuse = new Fuse(data, {
+            keys: ['subject']
+        });
+        const results = fuse.search(subject,{ limit: 5 });
+        res.json(results.map((item) => item.item.subject));
+    } catch (error) {
+        console.error(error)
+    }
 })
 
 app.post('/count', async( req,res ) => {
-    const { subject } = req.body
-    const data = await  subjectModel.findOne( { subject } )
-    res.send({count : data.count})
+    try{
+
+        const { subject } = req.body
+        const data = await  subjectModel.findOne( { subject } )
+        res.send({count : data.count})
+    } catch(error) {
+        console.error(error)
+    }
 })
 
 app.post('/subscribe', async( req,res ) => {
-    const { email,subject } = req.body
-    const response = new subscribersModel( {  email,subject,time:Date.now() } )
-    await response.save()
-    res.send({response})
+    try {
+        const { email,subject } = req.body
+        const response = new subscribersModel( {  email,subject,time:Date.now() } )
+        await response.save()
+        res.send({response})
+    } catch (error) {
+        console.error(error)
+    }
 })
 
 async function save() {
